@@ -393,23 +393,23 @@ local function runRotation()
     end -- End Action List - Extras
     local function actionList_Defensive()
         -- Anti-Magic Shell
-        if isChecked("Anti-Magic Shell") and cast.able.antiMagicShell() and php < getOptionValue("Anti-Magic Shell") then
+        if isChecked("Anti-Magic Shell") and cast.able.antiMagicShell() and php < getOptionValue("Anti-Magic Shell") and inCombat then
             if cast.antiMagicShell() then return end
         end
         -- Death Strike
-        if isChecked("Death Strike") and cast.able.deathStrike() and (php < getOptionValue("Death Strike") or buff.darkSuccor.exists()) then
+        if isChecked("Death Strike") and cast.able.deathStrike() and (php < getOptionValue("Death Strike") or buff.darkSuccor.exists()) and inCombat then
             if cast.deathStrike() then return end
         end
         -- Death Pact
-        if isChecked("Death Pact") and cast.able.deathPact() and php < getOptionValue("Death Pact") then
+        if isChecked("Death Pact") and cast.able.deathPact() and php < getOptionValue("Death Pact") and inCombat then
             if cast.deathPact() then return end
         end
         -- Icebound Fortitude
-        if isChecked("Icebound Fortitude") and cast.able.iceboundFortitude() and php < getOptionValue("Icebound Fortitude") then
+        if isChecked("Icebound Fortitude") and cast.able.iceboundFortitude() and php < getOptionValue("Icebound Fortitude") and inCombat then
             if cast.iceboundFortitude() then return end
         end
         -- Raise Ally
-        if isChecked("Raise Ally") then
+        if isChecked("Raise Ally") and inCombat then
             if getOptionValue("Raise Ally")==1 and cast.able.raiseAlly("target","dead")
                 and UnitIsPlayer("target") and UnitIsDeadOrGhost("target") and GetUnitIsFriend("target","player")
             then
