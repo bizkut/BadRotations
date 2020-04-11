@@ -1,4 +1,4 @@
--- This creates the normal BadRotations Configuration Window
+-- This creates the normal BudakJahat Configuration Window
 br.ui.window.config = {}
 function br.ui:createConfigWindow()
     br.ui.window.config = br.ui:createWindow("config", 275, 400,"Configuration")

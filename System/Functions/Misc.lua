@@ -557,7 +557,7 @@ function SlashCommandHelp(cmd, msg)
 		return
 	end
 	if commandHelp == nil then
-		commandHelp = "BadRotations Slash Commands\n        /" .. cmd .. " - " .. msg
+		commandHelp = "BudakJahat Slash Commands\n        /" .. cmd .. " - " .. msg
 	else
 		commandHelp = commandHelp .. "\n        /" .. cmd .. " - " .. msg
 	end
@@ -863,11 +863,11 @@ function br.addonDebug(msg,system)
 	if isChecked("Addon Debug Messages") then 
 		if system == true and (getValue("Addon Debug Messages") == 1 or getValue("Addon Debug Messages") == 3) then
 			if br.timer:useTimer("System Delay", 0.1) then
-				print(br.classColor .. "[BadRotations] System Debug: |cffFFFFFF" .. tostring(msg))
+				print(br.classColor .. "[BudakJahat] System Debug: |cffFFFFFF" .. tostring(msg))
 			end
 		elseif system ~= true and (getValue("Addon Debug Messages") == 2 or getValue("Addon Debug Messages") == 3) then
 			if br.timer:useTimer("Profile Delay", 0.1) then
-				print(br.classColor .. "[BadRotations] Profile Debug: |cffFFFFFF" .. tostring(msg))
+				print(br.classColor .. "[BudakJahat] Profile Debug: |cffFFFFFF" .. tostring(msg))
 			end
 		end
 	end

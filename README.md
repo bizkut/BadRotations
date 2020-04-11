@@ -1,4 +1,4 @@
-De BadRotations
+De BudakJahat
 
 ## Patch 8.0+
 
@@ -10,11 +10,11 @@ Little How-To for the first run: <https://gyazo.com/d11da29a9d7dba4c93e5b65c008c
 
 ## About
 
-BadRotations Maintained By: CuteOne
+BudakJahat Maintained By: CuteOne
 
 -- Intro --
 
-BadRotations is maintained by CuteOne with additional contributions from other developers who worked on combat rotation bots such as PQR, ProbablyEngine, and others. While it is more of a developer playground as compared to the more "for profit" bots this is free to use and we feel it is just as good, if not better, than the bots you pay money for. Don't agree? Feel free to post any issues you have and we will do our best to resolve them. **Please note that you MUST have a Lua Unlocker to use this tool.**
+BudakJahat is maintained by CuteOne with additional contributions from other developers who worked on combat rotation bots such as PQR, ProbablyEngine, and others. While it is more of a developer playground as compared to the more "for profit" bots this is free to use and we feel it is just as good, if not better, than the bots you pay money for. Don't agree? Feel free to post any issues you have and we will do our best to resolve them. **Please note that you MUST have a Lua Unlocker to use this tool.**
 
 -- Features --
 
@@ -27,15 +27,15 @@ BadRotations is maintained by CuteOne with additional contributions from other d
 
 -- Profile Sellers/Stealers --
 
-BadRotations is a free project for anyone to use and contribute to but we do ask that none of the code used here be taken or sold without permission.
+BudakJahat is a free project for anyone to use and contribute to but we do ask that none of the code used here be taken or sold without permission.
 
 -- Join the Team --
 
-If you are a developer or are interested in being a beta tester, feel free to get in contact with one of the current coders to join BadRotations development team.
+If you are a developer or are interested in being a beta tester, feel free to get in contact with one of the current coders to join BudakJahat development team.
 
 ## Updates
 
-If you have code to improve a class you can send a "pull request". We will look over it and may merge it with BadRotations.
+If you have code to improve a class you can send a "pull request". We will look over it and may merge it with BudakJahat.
 
 Current Coders: **See Profile List Below**
 
@@ -47,7 +47,7 @@ If you want to know what changes were made read the commit messages. Most of the
 
 ## Regarding Lua Errors
 
-Please submit any errors as issues here on GitHub or join the BadRotations community:
+Please submit any errors as issues here on GitHub or join the BudakJahat community:
 
 Discord channel:
 https://discord.gg/VE7V7Mz

@@ -23,7 +23,7 @@
 `castGround(Unit,SpellID,maxDistance)` Used to cast Spells on ground. Returns true if everything passes.
 `castGroundBetween(Unit,SpellID,maxDistance) ` Used to ground cast between yourself and target. Returns true if everything passes.
 `castHealGround(SpellID,Radius,Health,NumberOfPlayers)` Used to ground cast between lowest br.friend members. Returns true if everything passes.
-[castSpell(Unit,SpellID,FacingCheck,MovementCheck,SpamAllowed,KnownSkip)](https://github.com/CuteOne/BadRotations/wiki/castSpell-Method#castspell) Used to cast Spells. Returns true if everything passes.
+[castSpell(Unit,SpellID,FacingCheck,MovementCheck,SpamAllowed,KnownSkip)](https://github.com/CuteOne/BudakJahat/wiki/castSpell-Method#castspell) Used to cast Spells. Returns true if everything passes.
 **GET - Mixed**
 ***
 `getAllies(Target,Radius) - Table` Returns a table of the allies found within Radius of the target

@@ -4,7 +4,7 @@ function Print(msg)
 	if msg == nil then
 		return
 	end
-	print(br.classColor .. "[BadRotations] |cffFFFFFF" .. msg)
+	print(br.classColor .. "[BudakJahat] |cffFFFFFF" .. msg)
 end
 commandHelp = "|cffFF0000Slash Commands"
 function SlashCommandHelp(cmd, msg)
@@ -25,11 +25,11 @@ local function toggleUI()
 	local UIState = false
 	if UIState == false then
 		mainButton:Click()
-		BadRotationsButton:Show()
+		BudakJahatButton:Show()
 		UIState = true
 	else
 		mainButton:Click()
-		BadRotationsButton:Hide()
+		BudakJahatButton:Hide()
 		UIState = false
 	end
 end
@@ -91,7 +91,7 @@ end
 
 function slashHelpList()
 	SLASH_BR1, SLASH_BR2 = "/br", "/badrotations"
-	SlashCommandHelp("br", "Toggles BadRotations On/Off")
+	SlashCommandHelp("br", "Toggles BudakJahat On/Off")
 	SlashCommandHelp("br help", "Displays this list of help commands. ***Obviously***")
 	SlashCommandHelp("br blacklist mouseover", "Adds/Removes mouseover unit to healing blacklist.")
 	SlashCommandHelp("br blacklist dump", "Prints all units currently on blacklist.")
@@ -349,10 +349,10 @@ function handler(message, editbox)
 			end
 		elseif msg2 == "icon" then 
 			if hiddenIcon == nil or hiddenIcon == false then 
-				BadRotationsButton:Hide()
+				BudakJahatButton:Hide()
 				hiddenIcon = true
 			else
-				BadRotationsButton:Show()
+				BudakJahatButton:Show()
 				hiddenIcon = false 
 			end
 		elseif msg2 == nil then

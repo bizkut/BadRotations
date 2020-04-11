@@ -45,20 +45,20 @@ function TogglesFrame()
 			br.data.settings[br.selectedSpec].toggles['Power'] = 0
 			mainButton:SetNormalTexture(backIconOff)
 			-- on/off switch
-			if br.data.settings[br.selectedSpec]["Start/Stop BadRotationsCheck"] ~= 0 then
-                br.data.settings[br.selectedSpec]["Start/Stop BadRotationsCheck"] = 0
-                ChatOverlay("|cFFFF0000-= BadRotations Off =-")
+			if br.data.settings[br.selectedSpec]["Start/Stop BudakJahatCheck"] ~= 0 then
+                br.data.settings[br.selectedSpec]["Start/Stop BudakJahatCheck"] = 0
+                ChatOverlay("|cFFFF0000-= BudakJahat Off =-")
 			end
-			GameTooltip:SetText("|cff00FF00Enable |cffFF0000BadRotations \n|cffFFDD11Hold Left Alt and scroll mouse to adjust size.", 225/255, 225/255, 225/255)
+			GameTooltip:SetText("|cff00FF00Enable |cffFF0000BudakJahat \n|cffFFDD11Hold Left Alt and scroll mouse to adjust size.", 225/255, 225/255, 225/255)
 			mainButtonFrame.texture:SetTexture(genericIconOff)
 		else
 			br.data.settings[br.selectedSpec].toggles['Power'] = 1
 			-- on/off switch
-			if br.data.settings[br.selectedSpec]["Start/Stop BadRotationsCheck"] ~= 1 then
-                br.data.settings[br.selectedSpec]["Start/Stop BadRotationsCheck"] = 1
-                ChatOverlay("|cFF00FF00-= BadRotations On =-")
+			if br.data.settings[br.selectedSpec]["Start/Stop BudakJahatCheck"] ~= 1 then
+                br.data.settings[br.selectedSpec]["Start/Stop BudakJahatCheck"] = 1
+                ChatOverlay("|cFF00FF00-= BudakJahat On =-")
 			end
-			GameTooltip:SetText("|cffFF0000Disable BadRotations \n|cffFFDD11Hold Left Alt and scroll mouse to adjust size.", 225/255, 225/255, 225/255)
+			GameTooltip:SetText("|cffFF0000Disable BudakJahat \n|cffFFDD11Hold Left Alt and scroll mouse to adjust size.", 225/255, 225/255, 225/255)
 			mainButton:SetNormalTexture(backIconOn)
 			mainButtonFrame.texture:SetTexture(genericIconOn)
 		end
@@ -66,9 +66,9 @@ function TogglesFrame()
 	mainButton:SetScript("OnEnter", function(self)
 		GameTooltip:SetOwner(mainButton, 0 , 0)
 		if br.data.settings[br.selectedSpec].toggles['Power'] == 1 then
-			GameTooltip:SetText("|cffFF0000Disable BadRotations \n|cffFFDD11Hold Left Alt and scroll mouse to adjust size.", 225/255, 225/255, 225/255)
+			GameTooltip:SetText("|cffFF0000Disable BudakJahat \n|cffFFDD11Hold Left Alt and scroll mouse to adjust size.", 225/255, 225/255, 225/255)
 		else
-			GameTooltip:SetText("|cff00FF00Enable |cffFF0000BadRotations \n|cffFFDD11Hold Left Alt and scroll mouse to adjust size.", 225/255, 225/255, 225/255)
+			GameTooltip:SetText("|cff00FF00Enable |cffFF0000BudakJahat \n|cffFFDD11Hold Left Alt and scroll mouse to adjust size.", 225/255, 225/255, 225/255)
 		end
 		GameTooltip:Show()
 	end)

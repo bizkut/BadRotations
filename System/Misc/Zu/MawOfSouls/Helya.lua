@@ -1,7 +1,7 @@
 -- --+--------------------+--
 -- --|Am I Fighting Helya?|--
 -- --+--------------------+--
--- function isBadRotationsHelya()
+-- function isBudakJahatHelya()
 --   -- local objectCount = GetObjectCountBR() or 0
 --   for i = 1,GetObjectCountBR() do
 --     local name = ObjectName(ObjectWithIndex(i))

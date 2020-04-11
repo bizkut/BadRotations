@@ -243,7 +243,7 @@ function castSpell(Unit,SpellID,FacingCheck,MovementCheck,SpamAllowed,KnownSkip,
 								end
 								--lastSpellCast = SpellID
 								-- change main button icon
-								--if getOptionCheck("Start/Stop BadRotations") then
+								--if getOptionCheck("Start/Stop BudakJahat") then
 									mainButton:SetNormalTexture(select(3,GetSpellInfo(SpellID)))
 									lastSpellCast = SpellID
 									lastSpellTarget = UnitGUID(Unit)
@@ -264,7 +264,7 @@ function castSpell(Unit,SpellID,FacingCheck,MovementCheck,SpamAllowed,KnownSkip,
 							local X,Y,Z = ObjectPosition(Unit)
 							ClickPosition(X,Y,Z)
 						end
-						--if getOptionCheck("Start/Stop BadRotations") then
+						--if getOptionCheck("Start/Stop BudakJahat") then
 							mainButton:SetNormalTexture(select(3,GetSpellInfo(SpellID)))
 							lastSpellCast = SpellID
 							lastSpellTarget = UnitGUID(Unit)
@@ -338,7 +338,7 @@ function castSpellMacro(Unit,SpellID,FacingCheck,MovementCheck,SpamAllowed,Known
 								RunMacroText("/cast [@"..Unit.."] "..GetSpellInfo(SpellID))
 								--lastSpellCast = SpellID
 								-- change main button icon
-								--if getOptionCheck("Start/Stop BadRotations") then
+								--if getOptionCheck("Start/Stop BudakJahat") then
 									mainButton:SetNormalTexture(select(3,GetSpellInfo(SpellID)))
 									lastSpellCast = SpellID
 									lastSpellTarget = UnitGUID(Unit)
@@ -353,7 +353,7 @@ function castSpellMacro(Unit,SpellID,FacingCheck,MovementCheck,SpamAllowed,Known
 					else
 						currentTarget = UnitGUID(Unit)
 						RunMacroText("/cast [@"..Unit.."] "..GetSpellInfo(SpellID))
-						--if getOptionCheck("Start/Stop BadRotations") then
+						--if getOptionCheck("Start/Stop BudakJahat") then
 							mainButton:SetNormalTexture(select(3,GetSpellInfo(SpellID)))
 							lastSpellCast = SpellID
 							lastSpellTarget = UnitGUID(Unit)

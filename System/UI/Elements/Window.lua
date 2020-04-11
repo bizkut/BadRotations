@@ -10,7 +10,7 @@ function br.ui:createWindow(name, width, height, title, color, messageWindow)
     if title == nil then title = name end
     if color == nil then color = br.classColor end
     local window = DiesalGUI:Create('Window')
-    window:SetTitle(color..'BadRotations', title)
+    window:SetTitle(color..'BudakJahat', title)
     window.settings.width = width or 250
     window.settings.height = height or 250
     window.settings.header = true

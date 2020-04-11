@@ -37,7 +37,7 @@ function canRun()
 			end
 		end
 	else
-		ChatOverlay("|cffFF0000-BadRotations Paused-")
+		ChatOverlay("|cffFF0000-BudakJahat Paused-")
 		return false
 	end
 end

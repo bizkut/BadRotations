@@ -76,7 +76,7 @@ function br:Run()
 	if not br.loadedIn then
 		br:Engine()
         br:ObjectManager()
-		ChatOverlay("-= BadRotations Loaded =-")
+		ChatOverlay("-= BudakJahat Loaded =-")
 		Print("Loaded")
 		br.loadedIn = true
 	end
@@ -127,7 +127,7 @@ function frame:OnEvent(event, arg1, arg2, arg3, arg4, arg5)
 	if event == "LOADING_SCREEN_DISABLED" then
 		br.disablePulse = false
 	end
-	if event == "ADDON_LOADED" and arg1 == "BadRotations" then
+	if event == "ADDON_LOADED" and arg1 == "BudakJahat" then
 		-- Load Settings
 		br.data = deepcopy(brdata)
 		br.profile = deepcopy(brprofile)

@@ -208,7 +208,7 @@
 -- 	mainButton:SetScript("OnDragStart", mainButton.StartMoving)
 -- 	mainButton:SetScript("OnDragStop", mainButton.StopMovingOrSizing)
 -- 	--CreateBorder(mainButton, 8, 0.6, 0.6, 0.6)
--- 	if getOptionCheck("Start/Stop BadRotations") then
+-- 	if getOptionCheck("Start/Stop BudakJahat") then
 -- 		mainButton:SetNormalTexture(backIconOn)
 -- 	else
 -- 		mainButton:SetNormalTexture(backIconOff)
@@ -219,31 +219,31 @@
 -- 			mainButton:SetNormalTexture(backIconOff)
 -- 			-- on/off switch
 -- 			-- if br.selectedSpec == 5 then
--- 			-- 	if br.data.settings[br.selectedSpec][br.selectedSpec]["Start/Stop BadRotationsCheck"] ~= 0 then
--- 			-- 		_G["optionsStart/Stop BadRotationsCheck"]:Click()
+-- 			-- 	if br.data.settings[br.selectedSpec][br.selectedSpec]["Start/Stop BudakJahatCheck"] ~= 0 then
+-- 			-- 		_G["optionsStart/Stop BudakJahatCheck"]:Click()
 -- 			-- 	end
 -- 			-- else
--- 				if br.data.settings[br.selectedSpec]["Start/Stop BadRotationsCheck"] ~= 0 then
--- 					-- _G["optionsStart/Stop BadRotationsCheck"]:Click()
--- 					br.data.settings[br.selectedSpec]["Start/Stop BadRotationsCheck"] = 0
+-- 				if br.data.settings[br.selectedSpec]["Start/Stop BudakJahatCheck"] ~= 0 then
+-- 					-- _G["optionsStart/Stop BudakJahatCheck"]:Click()
+-- 					br.data.settings[br.selectedSpec]["Start/Stop BudakJahatCheck"] = 0
 -- 				end
 -- 			-- end
--- 			GameTooltip:SetText("|cff00FF00Enable |cffFF0000BadRotations \n|cffFFDD11Hold Left Alt and scroll mouse to adjust size.", 225/255, 225/255, 225/255)
+-- 			GameTooltip:SetText("|cff00FF00Enable |cffFF0000BudakJahat \n|cffFFDD11Hold Left Alt and scroll mouse to adjust size.", 225/255, 225/255, 225/255)
 -- 			mainButtonFrame.texture:SetTexture(genericIconOff)
 -- 		else
 -- 			br.data.settings[br.selectedSpec].toggles['Power'] = 1
 -- 			-- on/off switch
 -- 			-- if br.selectedSpec == 5 then
--- 			-- 	if br.data.settings[br.selectedSpec][br.selectedSpec]["Start/Stop BadRotationsCheck"] ~= 1 then
--- 			-- 		_G["optionsStart/Stop BadRotationsCheck"]:Click()
+-- 			-- 	if br.data.settings[br.selectedSpec][br.selectedSpec]["Start/Stop BudakJahatCheck"] ~= 1 then
+-- 			-- 		_G["optionsStart/Stop BudakJahatCheck"]:Click()
 -- 			-- 	end
 -- 			-- else
--- 				if br.data.settings[br.selectedSpec]["Start/Stop BadRotationsCheck"] ~= 1 then
--- 					-- _G["optionsStart/Stop BadRotationsCheck"]:Click()
--- 					br.data.settings[br.selectedSpec]["Start/Stop BadRotationsCheck"] = 1
+-- 				if br.data.settings[br.selectedSpec]["Start/Stop BudakJahatCheck"] ~= 1 then
+-- 					-- _G["optionsStart/Stop BudakJahatCheck"]:Click()
+-- 					br.data.settings[br.selectedSpec]["Start/Stop BudakJahatCheck"] = 1
 -- 				end
 -- 			-- end
--- 			GameTooltip:SetText("|cffFF0000Disable BadRotations \n|cffFFDD11Hold Left Alt and scroll mouse to adjust size.", 225/255, 225/255, 225/255)
+-- 			GameTooltip:SetText("|cffFF0000Disable BudakJahat \n|cffFFDD11Hold Left Alt and scroll mouse to adjust size.", 225/255, 225/255, 225/255)
 -- 			mainButton:SetNormalTexture(backIconOn)
 -- 			mainButtonFrame.texture:SetTexture(genericIconOn)
 -- 		end
@@ -251,9 +251,9 @@
 -- 	mainButton:SetScript("OnEnter", function(self)
 -- 		GameTooltip:SetOwner(mainButton, 0 , 0)
 -- 		if br.data.settings[br.selectedSpec].toggles['Power'] == 1 then
--- 			GameTooltip:SetText("|cffFF0000Disable BadRotations \n|cffFFDD11Hold Left Alt and scroll mouse to adjust size.", 225/255, 225/255, 225/255)
+-- 			GameTooltip:SetText("|cffFF0000Disable BudakJahat \n|cffFFDD11Hold Left Alt and scroll mouse to adjust size.", 225/255, 225/255, 225/255)
 -- 		else
--- 			GameTooltip:SetText("|cff00FF00Enable |cffFF0000BadRotations \n|cffFFDD11Hold Left Alt and scroll mouse to adjust size.", 225/255, 225/255, 225/255)
+-- 			GameTooltip:SetText("|cff00FF00Enable |cffFF0000BudakJahat \n|cffFFDD11Hold Left Alt and scroll mouse to adjust size.", 225/255, 225/255, 225/255)
 -- 		end
 -- 		GameTooltip:Show()
 -- 	end)
