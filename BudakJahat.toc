@@ -1,11 +1,11 @@
 ## Interface: 80300
-## Title: |cffa330c9BadRotations
+## Title: |cffa330c9BudakJahat
 ## Notes: |cffa330c9By CuteOne.
 ## Author: CuteOne
 ## Version: 1.33.1
 ## SavedVariablesPerCharacter: brdata, brprofile
 
-BadRotations.lua
+BudakJahat.lua
 bindings.xml
 misc.xml
 
@@ -97,7 +97,7 @@ System\Engines\Interrupts.lua
 System\Engines\ttdTable.lua
 System\Engines\Tracker.lua
 
-## BadRotations UI
+## BudakJahat UI
 
 System\UI\ChatOverlay.lua
 System\UI\MinimapButton.lua
