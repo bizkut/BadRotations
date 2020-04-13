@@ -468,31 +468,31 @@ local function runRotation()
                 end
             end
 
-            if php <= getOptionValue("High Prio Deathstrike") and power >= 45 then
+            if php <= getOptionValue("High Prio Deathstrike") and power >= 45 and inCombat then
                 if cast.deathStrike() then
                     return true
                 end
             end
             -- Rune Tap
-            if isChecked("Rune Tap") and php <= getOptionValue("Rune Tap") and runes >= 3 and charges.runeTap.count() > 1 and not buff.runeTap.exists() then
+            if isChecked("Rune Tap") and php <= getOptionValue("Rune Tap") and runes >= 3 and charges.runeTap.count() > 1 and not buff.runeTap.exists() and inCombat then
                 if cast.runeTap() then
                     return
                 end
             end
             -- Anti-Magic Shell
-            if isChecked("Anti-Magic Shell") and php <= getOptionValue("Anti-Magic Shell") then
+            if isChecked("Anti-Magic Shell") and php <= getOptionValue("Anti-Magic Shell") and inCombat then
                 if cast.antiMagicShell() then
                     return
                 end
             end
             -- Icebound Fortitude
-            if isChecked("Icebound Fortitude") and php <= getOptionValue("Icebound Fortitude") and not buff.vampiricBlood.exists("player") then
+            if isChecked("Icebound Fortitude") and php <= getOptionValue("Icebound Fortitude") and not buff.vampiricBlood.exists("player") and inCombat then
                 if cast.iceboundFortitude() then
                     return
                 end
             end
             -- Vampiric Blood
-            if isChecked("Vampiric Blood") and php <= getOptionValue("Vampiric Blood") and not buff.iceboundFortitude.exists("player") then
+            if isChecked("Vampiric Blood") and php <= getOptionValue("Vampiric Blood") and not buff.iceboundFortitude.exists("player") and inCombat then
                 if cast.vampiricBlood() then
                     return
                 end
