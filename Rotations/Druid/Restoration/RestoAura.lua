@@ -161,7 +161,7 @@ local function createOptions()
 	local function rotationOptions()
 		local section
 		-- General Options
-		section = br.ui:createSection(br.ui.window.profile, "General")
+		section = br.ui:createSection(br.ui.window.profile, "General - Version 1.01")
 		br.ui:createCheckbox(section, "OOC Healing", "|cff15FF00Enables|cffFFFFFF/|cffD60000Disables |cffFFFFFFout of combat healing|cffFFBB00.", 1)
 		-- DBM cast Rejuvenation
 		br.ui:createCheckbox(
@@ -241,7 +241,10 @@ local function createOptions()
 			br.ui:createCheckbox(section, "Well of Existence")
 		-- Life Binder's Invocation
 			br.ui:createSpinner(section, "Life-Binder's Invocation", 85, 1, 100, 5, "Health threshold to use")
-            br.ui:createSpinnerWithout(section, "Life-Binder's Invocation Targets", 5, 1, 40, 1, "Number of targets to use")
+			br.ui:createSpinnerWithout(section, "Life-Binder's Invocation Targets", 5, 1, 40, 1, "Number of targets to use")
+		-- Guardian Shell
+			-- br.ui:createSpinner(section, "Guardian Shell", 85, 1, 100, 5, "Health threshold to use")
+            -- br.ui:createSpinnerWithout(section, "Guardian Shell Targets", 5, 1, 40, 1, "Number of targets to use")			
 		 br.ui:checkSectionState(section)
 		-- Defensive Options
 		section = br.ui:createSection(br.ui.window.profile, "Defensive")
@@ -673,7 +676,7 @@ local function runRotation()
 			end
 		end -- End Shapeshift Form Management
 		-- Revive
-		if isChecked("Revive") then
+		if isChecked("Revive") and not inCombat and not isMoving("player") and br.timer:useTimer("Resurrect", 4) then
 			if getOptionValue("Revive") == 1 and UnitIsPlayer("target") and UnitIsDeadOrGhost("target") and GetUnitIsFriend("target","player") then
 				if cast.revive("target", "dead") then
 					br.addonDebug("Casting Revive")
@@ -687,13 +690,16 @@ local function runRotation()
 				end
 			end
 			if getOptionValue("Revive") == 3 then
+				local deadPlayers = {}
 				for i =1, #br.friend do
 					if UnitIsPlayer(br.friend[i].unit) and UnitIsDeadOrGhost(br.friend[i].unit) then
-						if cast.revive(br.friend[i].unit) then 
-							br.addonDebug("Casting Revive")
-							return true 
-						end
+						tinsert(deadPlayers,br.friend[i].unit)
 					end
+				end
+				if #deadPlayers > 1 then
+					if cast.revitalize() then br.addonDebug("Casting Mass Resurrection") return true end
+				elseif #deadPlayers == 1 then
+					if cast.revive(deadPlayers[1],"dead") then br.addonDebug("Casting Revive (Auto)") return true end
 				end
 			end
 		end
@@ -1019,7 +1025,13 @@ local function runRotation()
                     br.addonDebug("Casting Life-Binder's Invocation")
                     return true
                 end
-            end
+			end
+			if isChecked("Guardian Shell") and essence.guardianShell.active and cd.guardianShell.remain() <= gcdMax and getLowAllies(getOptionValue("Guardian Shell")) >= getOptionValue("Guardian Shell Targets") then
+                if cast.guardianShell() then
+                    br.addonDebug("Casting Guardian Shell")
+                    return true
+                end
+			end
 			if isChecked("Ever-Rising Tide") and essence.overchargeMana.active and cd.overchargeMana.remain() <= gcdMax and getOptionValue("Ever-Rising Tide - Mana") <= mana then
 				if getOptionValue("Ever-Rising Tide") == 1 then
 					if cast.overchargeMana() then
