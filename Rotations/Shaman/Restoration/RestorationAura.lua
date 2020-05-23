@@ -300,15 +300,14 @@ local function runRotation()
         friends.yards25 = getAllies("player",25)
         friends.yards40 = getAllies("player",40)
         
-        --local lowest = {}
-        --lowest.unit = "player"
-        --lowest.hp = 100
-        --for i = 1, #br.friend do
-        --    if br.friend[i].hp < lowest.hp then
-        --        lowest = br.friend[i]
-        --    end
-        --end
-        lowest = br.friend[1]
+        local lowest = {}
+        lowest.unit = "player"
+        lowest.hp = 100
+        for i = 1, #br.friend do
+            if br.friend[i].hp < lowest.hp then
+                lowest = br.friend[i]
+            end
+        end
 
         if inInstance and select(3, GetInstanceInfo()) == 8 then
             for i = 1, #tanks do
