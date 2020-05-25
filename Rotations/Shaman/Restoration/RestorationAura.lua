@@ -300,14 +300,15 @@ local function runRotation()
         friends.yards25 = getAllies("player",25)
         friends.yards40 = getAllies("player",40)
         
-        local lowest = {}
-        lowest.unit = "player"
-        lowest.hp = 100
-        for i = 1, #br.friend do
-            if br.friend[i].hp < lowest.hp then
-                lowest = br.friend[i]
-            end
-        end
+        --local lowest = {}
+        --lowest.unit = "player"
+        --lowest.hp = 100
+        --for i = 1, #br.friend do
+        --    if br.friend[i].hp < lowest.hp then
+        --        lowest = br.friend[i]
+        --    end
+        --end
+        lowest = br.friend[1]
 
         if inInstance and select(3, GetInstanceInfo()) == 8 then
             for i = 1, #tanks do
@@ -550,7 +551,7 @@ local function runRotation()
            if isChecked("Healing Stream Totem") and cd.healingStreamTotem.remain() <= gcd and not talent.cloudburstTotem then
                -- for i = 1, #br.friend do                           
                     if lowest.hp <= getValue("Healing Stream Totem") then
-                        if cast.healingStreamTotem(lowest.unit) then br.addonDebug("Casting Healing Stream Totem") return end     
+                        if cast.healingStreamTotem() then br.addonDebug("Casting Healing Stream Totem") return end     
                     end
                -- end
             end
