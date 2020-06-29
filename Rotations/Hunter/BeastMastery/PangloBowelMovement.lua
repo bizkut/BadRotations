@@ -153,7 +153,7 @@ local function runRotation()
     local focusDeficit                       = br.player.power.focus.deficit()
     local gcd                                = br.player.gcd
     local gcdMax                             = br.player.gcdMax
-    local gcdFixed                           = gcdMax + .150
+    local gcdFixed                           = GetSpellCooldown(61304) + .150
     local has                                = br.player.has
     local inCombat                           = br.player.inCombat
     local inInstance                         = br.player.instance=="party"
@@ -172,7 +172,6 @@ local function runRotation()
     local units                              = br.player.units
     local use                                = br.player.use
     local petTarget                          = "target"
-    local feignTime
     local explosiveCount                     = 0
 
     -- Global Functions
@@ -401,9 +400,10 @@ local function runRotation()
                                     FaceDirection(ObjectFacing("player"), true)
                                 end)
                             end ]]
-                        elseif cd.freezingTrap.remains() > gcdFixed and cast.able.feignDeath() and isChecked("Feign Thing") then
+                        elseif (cd.freezingTrap.remains() > gcdFixed or not isChecked("Ice Trap")) and cast.able.feignDeath() and isChecked("Feign Thing") then
                             if cast.feignDeath() then
                                 feignTime = GetTime()
+                                return true
                             end
                         end
                     end
@@ -434,7 +434,7 @@ local function runRotation()
             end
         end
         -- Dash
-        if isChecked("Dash") and cast.able.dash() and validTarget and petDistance > 10 and getDistance(petTarget) < 40 then
+        if isChecked("Dash") and cast.able.dash() and inCombat and validTarget and petDistance > 10 and getDistance(petTarget) < 40 then
             if cast.dash("pet") then return end
         end
         -- Purge
@@ -502,20 +502,26 @@ local function runRotation()
     end
 
     local function ST()
-        if not Barb1  and talent.killerCobra and buff.danceOfDeath.remains() < (gcdFixed + 2) then
+        if useCDs() and isChecked("Aspect of the Wild") and cd.aspectOfTheWild.remains() <= 2 then
+            if cast.barbedShot("target") then return end
+        end
+        if not Barb1 and talent.killerCobra and buff.danceOfDeath.remains() < (gcdFixed + 2) and charges.barbedShot.frac() < 1.3 then
             if buff.bestialWrath.exists("player") then
+                if useCDs() then if cast.aspectOfTheWild() then return end end
                 if cast.killCommand("target") then return end
-                if (cd.killCommand.remains() >= (gcdFixed+1) or focusDeficit <= 30) then
+                if (cd.killCommand.remains() >= (gcdFixed+1) or focusDeficit <= 40) then
                     if cast.cobraShot("target") then return end
                 end
             end
         end
 
 
-        if Barb1 or ((buff.frenzy.exists("pet") and buff.frenzy.remains("pet") <= 2) or charges.barbedShot.frac() >= 1.5 or not buff.frenzy.exists("pet"))
+        if Barb1 or ((buff.frenzy.exists("pet") and buff.frenzy.remains("pet") <= 2) or charges.barbedShot.frac() >= 1.3 or not buff.frenzy.exists("pet"))
         then
             if cast.barbedShot("target") then return end
         end
+
+        
 
         if hunterTTD() and not buff.aspectOfTheWild.exists() and isChecked("Aspect of the Wild") and useCDs() and (charges.barbedShot.frac() <= 1.2 or not traits.primalInstincts.active) then
             if cast.aspectOfTheWild() then return end
@@ -544,6 +550,9 @@ local function runRotation()
     end
 
     local function AOE()
+        if useCDs() and isChecked("Aspect of the Wild") and cd.aspectOfTheWild.remains() <= 2 then
+            if cast.barbedShot("target") then return end
+        end
         if (((buff.frenzy.exists("pet") and buff.frenzy.remains("pet") <= 2) or charges.barbedShot.frac() >= 1.8 or not buff.frenzy.exists("pet"))
             and (not useCDs() or (cd.aspectOfTheWild.remains() < gcdFixed))) or Barb1
         then
@@ -566,7 +575,7 @@ local function runRotation()
             if cast.bestialWrath() then return end
         end
 
-        if not Barb1 and (#enemies.yards8p < 3 or not traits.rapidReload.active) then
+        if not Barb1 and (#enemies.yards8p < 4 or not traits.rapidReload.active) then
             if cast.killCommand() then return end
         end
 
@@ -626,14 +635,13 @@ local function runRotation()
                 StartAttack()
         end
     end
-
-    if offGCD() then return end
-    if not Barb1 then 
-        if defensive() then return end
-        if Shadowshit() then return end
-    end
-    if feignTime == nil or (feignTime ~= nil and (GetTime() - feignTime > 1.2)) then
-        if pause() or (IsMounted() or IsFlying() or UnitOnTaxi("player") or UnitInVehicle("player")) or mode.rotation == 4 then
+    if botSpell ~= spell.feignDeath or ((feignTime ~= nil and (GetTime() - feignTime > 2)) and not debuff.grandDelusions.exists("player")) then
+        if offGCD() then return end
+        if not Barb1 then 
+            if defensive() then return end
+            if Shadowshit() then return end
+        end
+        if pause(true) or (IsMounted() or IsFlying() or UnitOnTaxi("player") or UnitInVehicle("player")) or mode.rotation == 4 then
             return true
         else
             if inCombat then

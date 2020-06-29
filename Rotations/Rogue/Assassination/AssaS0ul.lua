@@ -1,4 +1,7 @@
-local rotationName = "Fiskee - 8.3"
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------- This rotation is in 90% based on the rotation from fisker I am going to try to maintain it, this is mainly to make it easier to push updates to the BR project -------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+local rotationName = "S0ul - 8.3"
 local opener, opn1, opn2, opn3, opn4, opn5, opn6 = false, false, false, false, false, false, false
 br.rogueTables = {}
 local rogueTables = br.rogueTables
@@ -1311,7 +1314,7 @@ local function runRotation()
         if actionList_Extra() then return true end
 
         if not inCombat and GetObjectExists("target") and not UnitIsDeadOrGhost("target") and UnitCanAttack("target", "player") then
-            fightRemain = nil
+            if fightRemain ~= nil then fightRemain = nil end
             if actionList_PreCombat() then return true end
         end -- End Out of Combat Rotation
         if actionList_Opener() then return true end
