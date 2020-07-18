@@ -36,6 +36,11 @@ local function createToggles()
         [2] = { mode = "On", value = 1, overlay = "Fury On", tip = "Always used.", highlight = 0, icon = br.player.spell.furyOfAir}
     };
     CreateButton("Fury",5,0)
+    SunderModes = {
+        [1] = { mode = "On", value = 1, overlay = "Sundering On", tip = "Auto Use", highlight = 1, icon = br.player.spell.sundering},
+        [2] = { mode = "Off", value = 1, overlay = "Sundering Off", tip = "Manual Use", highlight = 0, icon = br.player.spell.sundering}
+    };
+    CreateButton("Sunder",6,0)
 end
 
 ---------------
@@ -370,7 +375,8 @@ actionList.Interrupts = function()
 end -- End Action List - Interrupts
 -- Action List - Cooldowns
 actionList.Cooldowns = function()
-    if useCDs() and getDistance("target") < 5 then
+    local usableCD = useCDs() and getDistance("target") < 5 or false
+    if usableCD then
         -- Bloodlust/Heroism
         -- bloodlust,if=azerite.ancestral_resonance.enabled
         -- Heart Essence - Worldvein Resonance
@@ -405,11 +411,13 @@ actionList.Cooldowns = function()
         if option.checked("Use Essence") and cast.able.memoryOfLucidDreams() then
             if cast.memoryOfLucidDreams() then return true end
         end
-        -- Feral Spirit
-        -- feral_spirit
-        if cast.able.feralSpirit() and (option.value("Feral Spirit") == 1 or (option.value("Feral Spirit") == 2 and useCDs())) then
-            if cast.feralSpirit() then return true end
-        end
+    end
+    -- Feral Spirit
+    -- feral_spirit
+    if cast.able.feralSpirit() and (option.value("Feral Spirit") == 1 or (option.value("Feral Spirit") == 2 and useCDs())) then
+        if cast.feralSpirit() then return true end
+    end
+    if usableCD then
         -- Heart Essence - Blood of the Enemy
         -- blood_of_the_enemy
         if option.checked("Use Essence") and cast.able.bloodOfTheEnemy() then
@@ -434,20 +442,6 @@ actionList.Cooldowns = function()
             end
             if canUseItem(14) then
                 useItem(14)
-            end
-        end
-        -- Earth Elemental
-        -- earth_elemental
-        if option.checked("Earth Elemental") and cast.able.earthElemental() then
-            if cast.earthElemental() then return true end
-        end
-    end
-    if useCDs() and getDistance("target") < 5 then
-        -- Ascendance
-        -- ascendance,if=cooldown.strike.remains>0
-        if option.checked("Ascendance") and cast.able.ascendance() then
-            if cd.stormstrike.remain() > 0 then
-                if cast.ascendance() then return true end
             end
         end
         -- Earth Elemental
@@ -519,7 +513,7 @@ actionList.Priority = function()
     end
     -- Sundering
     -- sundering,if=active_enemies>=3&(!essence.blood_of_the_enemy.major|(essence.blood_of_the_enemy.major&(buff.seething_rage.up|cooldown.blood_of_the_enemy.remains>40)))
-    if cast.able.sundering() and activeEnemiesMore2 and (not essence.bloodOfTheEnemy.active
+    if mode.sunder == 1 and cast.able.sundering() and activeEnemiesMore2 and (not essence.bloodOfTheEnemy.active
         or (essence.bloodOfTheEnemy.active and (buff.seethingRage.exists() or cd.bloodOfTheEnemy.remain() > 40)))
     then
         if cast.sundering(nil,"rect",3,11) then return true end
@@ -670,7 +664,7 @@ end -- End Action List - Defualt Core
 actionList.Filler = function()
     -- Sundering
     -- sundering,if=active_enemies<3
-    if cast.able.sundering() and activeEnemiesLess3 then
+    if mode.sunder == 1 and cast.able.sundering() and activeEnemiesLess3 then
         if cast.sundering(nil,"rect",1,11) then return true end
     end
     -- Heart Essence - Focused Azerite Beam
