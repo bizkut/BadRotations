@@ -5,7 +5,7 @@ function br:Engine()
 	-- Hidden Frame
 	if Pulse_Engine == nil then
 		Pulse_Engine = CreateFrame("Frame", nil, UIParent)
-		Pulse_Engine:SetScript("OnUpdate", BudakJahatUpdate)
+		Pulse_Engine:SetScript("OnUpdate", BadRotationsUpdate)
 		Pulse_Engine:Show()
 	end
 end
@@ -71,11 +71,11 @@ function br.antiAfk()
 	end
 end
 
-local brlocVersion = GetAddOnMetadata("BudakJahat","Version")
+local brlocVersion = GetAddOnMetadata("BadRotations","Version")
 local brcurrVersion
 local brUpdateTimer
 local collectGarbage = true
-function BudakJahatUpdate(self)
+function BadRotationsUpdate(self)
 	-- Check for Unlocker
 	if br.unlocked == false then
 		br.unlocked = loadUnlockerAPI()
@@ -93,22 +93,7 @@ function BudakJahatUpdate(self)
 		return false
 	else 
 		if br.unlocked and GetObjectCountBR() ~= nil then
-			if (brcurrVersion == nil or not brUpdateTimer or (GetTime() - brUpdateTimer) > 300) then --and EasyWoWToolbox ~= nil then
-				SendHTTPRequest('https://raw.githubusercontent.com/CuteOne/BudakJahat/master/BudakJahat.toc', nil, function(body) brcurrVersion =(string.match(body, "(%d+%p%d+%p%d+)")) end)
-				if brlocVersion and brcurrVersion then
-					brcleanCurr = gsub(tostring(brcurrVersion),"%p","")
-					brcleanLoc = gsub(tostring(brlocVersion),"%p","")
-					 if tonumber(brcleanCurr) ~= tonumber(brcleanLoc) then 
-						local msg = "BudakJahat is currently out of date. Local Version: "..brlocVersion.. " Current Version: "..brcurrVersion..".  Please download latest version for best performance."
-						if isChecked("Overlay Messages") then
-							RaidNotice_AddMessage(RaidWarningFrame, msg, {r=1, g=0.3, b=0.1})
-						else
-							Print(msg)
-						end
-					end
-					brUpdateTimer = GetTime()
-				end
-			end
+			checkBrOutOfDate() -- Check BR Out of Date
 			if br.data.settings ~= nil and br.data.settings[br.selectedSpec].toggles ~= nil then
 				if br.data.settings[br.selectedSpec].toggles["Power"] ~= nil and br.data.settings[br.selectedSpec].toggles["Power"] ~= 1 then
 					if br.player ~= nil and br.player.queue ~= nil and #br.player.queue ~= 0 then 
@@ -166,7 +151,7 @@ function BudakJahatUpdate(self)
 						collectGarbage = true
 						Print("Loaded Profile: " .. br.player.rotation.name)
 						-- Creates Settings Directory if not exist
-						local settingsDir = GetWoWDirectory() .. '\\Interface\\AddOns\\BudakJahat\\Settings\\'
+						local settingsDir = GetWoWDirectory() .. '\\Interface\\AddOns\\BadRotations\\Settings\\'
 						CreateDirectory(settingsDir)
 						br.settingsFile = settingsDir .. br.selectedSpec .. br.selectedProfileName .. ".lua"
 						br.rotationChanged = false
