@@ -12,7 +12,7 @@ local function getFolderSpecName(class,specID)
     end
 end
 local function rotationsDirectory()
-    return GetWoWDirectory() .. '\\Interface\\AddOns\\BudakJahat\\Rotations\\'
+    return GetWoWDirectory() .. '\\Interface\\AddOns\\' .. br.addonName .. '\\Rotations\\'
 end
 local function loadFile(profile,file,support)
     local loadProfile = loadstring(profile,file)
@@ -58,6 +58,7 @@ function br.loader:new(spec,specName)
     local brLoaded = brLoaded
 
     if not brLoaded then
+        br:loadSavedSettings()
         br.loader.loadProfiles()
         brLoaded = true
     end
