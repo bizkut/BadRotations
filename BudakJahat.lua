@@ -1,6 +1,6 @@
 -- define br global that will hold the bot global background features
 br = {}
-br.addonName = "BadRotations"
+br.addonName = "BudakJahat"
 br.data = {}
 br.data.ui = {}
 br.profile = {}
