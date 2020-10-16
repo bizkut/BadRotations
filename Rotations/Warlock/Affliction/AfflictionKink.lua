@@ -67,7 +67,7 @@ local function createOptions ()
 		-----------------------
 		--- GENERAL OPTIONS ---
 		-----------------------
-		section = br.ui:createSection(br.ui.window.profile,  "General - Version 1.1.1")
+		section = br.ui:createSection(br.ui.window.profile,  "General - Version 1.1.2")
             -- Dummy DPS Test
             br.ui:createSpinner(section, "DPS Testing",  5,  5,  60,  5,  "|cffFFFFFFSet to desired time for test in minuts. Min: 5 / Max: 60 / Interval: 5")
 
@@ -446,7 +446,7 @@ actionList.Defensive = function()
 
         -- Mortal Coil
         if option.checked("Mortal Coil") and php <= option.value("Mortal Coil") and isValidTarget("target") then
-            if cast.drainLife() then br.addonDebug("Casting Mortal Coil") return true end
+            if cast.mortalCoil() then br.addonDebug("Casting Mortal Coil") return true end
         end
 
 
@@ -591,9 +591,9 @@ end -- End Action List - Cooldowns
 
 -- Action List - Pre-Combat
 actionList.PreCombat = function()
-    if (not inCombat or buff.felDomination.exist("player")) and not (IsFlying() or IsMounted()) then
+    if not inCombat and not (IsFlying() or IsMounted()) then
         --actions.precombat+=/summon_pet
-        if option.checked("Pet Management") and not moving and level >= 5 and GetTime() - br.pauseTime > 0.5 and br.timer:useTimer("summonPet", 1) 
+        if option.checked("Pet Management") and (not inCombat or buff.felDomination.exists()) and not moving and level >= 5 and GetTime() - br.pauseTime > 0.5 and br.timer:useTimer("summonPet", 1) 
         then
             if mode.petSummon == 5 and pet.active.id() ~= 0 then
                 PetDismiss()
@@ -1261,7 +1261,7 @@ local function runRotation()
 
             -- Unstable Affliction
             --(debuff.unstableAffliction.stack("target") < 5  and debuff.agony.remain("target") > shards * gcdMax and debuff.corruption.remain("target") > shards * gcdMax and (debuff.siphonLife.remain("target") > shards *gcdMax or not talent.siphonLife))
-            if not moving and not debuff.unstableAffliction.exist("target") and cd.summonDarkglare.remain() < 8 and debuff.agony.remain("target") > gcdMax and debuff.corruption.remain("target") > gcdMax and (debuff.siphonLife.remain("target") > gcdMax or not talent.siphonLife) then
+            if not moving and not debuff.unstableAffliction.exists("target") and cd.summonDarkglare.remain() < 8 and debuff.agony.remain("target") > gcdMax and debuff.corruption.remain("target") > gcdMax and (debuff.siphonLife.remain("target") > gcdMax or not talent.siphonLife) then
                 if cast.unstableAffliction() then br.addonDebug("Casting Unstable Affliction") return true end
             end
 
