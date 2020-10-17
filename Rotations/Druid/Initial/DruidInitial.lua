@@ -1,4 +1,4 @@
-local rotationName = "CuteOne" -- Change to name of profile listed in options drop down
+local rotationName = "Initial Druid" -- Change to name of profile listed in options drop down
 
 ---------------
 --- Toggles ---
@@ -250,7 +250,7 @@ local function runRotation()
     end -- Pause
     return true
 end -- End runRotation
-local id = 000 -- Change to the spec id profile is for.
+local id = 1447 -- Change to the spec id profile is for.
 if br.rotations[id] == nil then br.rotations[id] = {} end
 tinsert(br.rotations[id],{
     name = rotationName,

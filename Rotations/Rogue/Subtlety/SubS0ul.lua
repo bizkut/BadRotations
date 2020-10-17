@@ -156,10 +156,10 @@ local function runRotation()
     UpdateToggle("Cooldown",0.25)
     UpdateToggle("Defensive",0.25)
     UpdateToggle("Interrupt",0.25)
-    br.player.mode.aoe = br.data.settings[br.selectedSpec].toggles["Aoe"]
-    br.player.mode.sd = br.data.settings[br.selectedSpec].toggles["SD"]
-    br.player.mode.sod = br.data.settings[br.selectedSpec].toggles["SoD"]
-    br.player.mode.st = br.data.settings[br.selectedSpec].toggles["ST"]
+    br.player.ui.mode.aoe = br.data.settings[br.selectedSpec].toggles["Aoe"]
+    br.player.ui.mode.sd = br.data.settings[br.selectedSpec].toggles["SD"]
+    br.player.ui.mode.sod = br.data.settings[br.selectedSpec].toggles["SoD"]
+    br.player.ui.mode.st = br.data.settings[br.selectedSpec].toggles["ST"]
     if not UnitAffectingCombat("player") then
         if not br.player.talent.secretTechnique then
             buttonST:Hide()
@@ -190,7 +190,7 @@ local function runRotation()
     local has                                           = br.player.has
     local inCombat                                      = br.player.inCombat
     local level                                         = br.player.level
-    local mode                                          = br.player.mode
+    local mode                                          = br.player.ui.mode
     local race                                          = br.player.race
     local racial                                        = br.player.getRacial()
     local spell                                         = br.player.spell
@@ -214,6 +214,7 @@ local function runRotation()
 
     enemies.get(20)
     enemies.get(20,"player",true)
+    enemies.get(25,"player", true) -- makes enemies.yards25nc
     enemies.get(30)
 
     if timersTable then
@@ -595,7 +596,7 @@ local function runRotation()
         end
         -- # (Unless already up because we took Shadow Focus) use Symbols off-gcd before the first Shuriken Storm from Tornado comes in.
         -- actions.cds+=/symbols_of_death,use_off_gcd=1,if=buff.shuriken_tornado.up&buff.shuriken_tornado.remains<=3.5
-        if mode.sod == 1 and buff.shurikenTornado.exists() and buff.shurikenTornado.remain() <= 3.5 then
+        if mode.sod == 1 and (buff.shurikenTornado.exists() and buff.shurikenTornado.remain() <= 3.5 or not talent.shurikenTornado) then
             if cast.symbolsOfDeath("player") then return true end
         end
     end
