@@ -81,9 +81,9 @@ function br:Run()
 		if not nameSet then
 			for i = 1, GetNumAddOns() do
 				local name, title = GetAddOnInfo(i)
-				if title == "|cffa330c9BadRotations" then
+				if title == "|cffa330c9BudakJahat" then
 					br.addonName = name
-					if br.addonName ~= "BadRotations" then
+					if br.addonName ~= "BudakJahat" then
 						Print("Currently known as "..tostring(br.addonName))
 					end
 					nameSet = true
@@ -91,7 +91,7 @@ function br:Run()
 				end
 			end
 		end
-		ChatOverlay("-= BadRotations Loaded =-")
+		ChatOverlay("-= BudakJahat Loaded =-")
 		Print("Loaded")
 		br.loadedIn = true
 	end
