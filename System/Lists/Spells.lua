@@ -2319,7 +2319,6 @@ br.lists.spells = {
                 exsanguinate                = 200806,
                 fanOfKnives                 = 51723,
                 garrote                     = 703,
-                kidneyShot                  = 408,
                 mutilate                    = 1329,
                 poisonedKnife               = 185565,
                 rupture                     = 1943,
@@ -2354,7 +2353,6 @@ br.lists.spells = {
                 deadlyPoison                = 2818,
                 garrote                     = 703,
                 internalBleeding            = 154953,
-                kidneyShot                  = 408,
                 rupture                     = 1943,
                 surgeOfToxins               = 192425,
                 toxicBlade                  = 245389,
@@ -2521,7 +2519,6 @@ br.lists.spells = {
                 evasion                     = 5277,
                 eviscerate                  = 196819,
                 gloomblade                  = 200758,
-                kidneyShot                  = 408,
                 --nightblade                  = 195452,
                 shadowBlades                = 121471,
                 shadowDance                 = 185313,
@@ -2530,7 +2527,6 @@ br.lists.spells = {
                 shurikenStorm               = 197835,
                 shurikenToss                = 114014,
                 symbolsOfDeath              = 212283,
-                shiv                        = 5938,
             },
             artifacts                       = {
 
@@ -2617,11 +2613,13 @@ br.lists.spells = {
                 distract                    = 1725,
                 feint                       = 1966,
                 kick                        = 1766,
+                kidneyShot                  = 408,
                 markedForDeath              = 137619,
                 pickLock                    = 1804,
                 pickPocket                  = 921,
                 sap                         = 6770,
                 shadowmeld                  = 58984,
+                shiv                        = 5938,
                 sprint                      = 2983,
                 stealth                     = 115191,
                 tricksOfTheTrade            = 57934,
@@ -2877,6 +2875,7 @@ br.lists.spells = {
         [264] = {
             abilities                       = {
              --   ancestralGuidance           = 108281,
+                ancestralVision             = 212048,
                 ancestralProtectionTotem    = 207399,
                 ascendance                  = 114052,
                 chainHeal                   = 1064,
@@ -2985,6 +2984,7 @@ br.lists.spells = {
                 corruption                  = 172,
                 darkSoul                    = 113860,
                 deathbolt                   = 264106,
+                demonicGateway              = 311699,
                 drainLife                   = 234153,
                 drainSoul                   = 198590,
                 grimoireOfSacrifice         = 108503,
@@ -2996,6 +2996,7 @@ br.lists.spells = {
                 reapSouls                   = 216698,
                 seedOfCorruption            = 27243,
                 shadowBolt                  = 232670,
+                shadowBolt2                 = 686,
                 shadowLock                  = 171138,
                 siphonLife                  = 63106,
                 spellLock                   = 19647,
@@ -3057,6 +3058,7 @@ br.lists.spells = {
                 absoluteCorruption          = 196103,
                 creepingDeath               = 264000,
                 darkSoul                    = 113860,
+                demonicSacrifice            = 108503,
                 drainSoul                   = 198590,
                 grimoireOfSacrifice         = 108503,
                 haunt                       = 48181,
@@ -3211,6 +3213,25 @@ br.lists.spells = {
                 crashingChaos               = 277644
             }
         },
+        -- Inital Warlock (1-10)
+        [1454] = {
+            abilities                       = {
+                controlDemon                = 93375,
+                corruption                  = 172,
+                createHearthstone           = 6201,
+                curseOfWeakness             = 702,
+                drainLife                   = 234153,
+                shadowBolt                  = 686,
+            },
+            buffs                           = {
+
+            },
+            debuffs                         = {
+                corruption                  = 146739,
+                curseOfWeakness             = 702,
+                drainLife                   = 234153,
+            },
+        },
         -- All
         Shared = {
             abilities                       = {
@@ -3245,12 +3266,14 @@ br.lists.spells = {
             },
             buffs                           = {
                 demonicSynergy              = 171982,
+                healthFunnel                = 755,
                 sindoreiSpite               = 208871,
                 soulHarvest                 = 196098,
                 soulstone                   = 20707,
+                unendingResolve             = 104773,
             },
             debuffs                         = {
-
+                fear                        = 5782,
             },
             glyphs                          = {
                 glyphOfTheFelImp            = 219424,
