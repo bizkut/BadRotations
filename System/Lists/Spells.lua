@@ -1805,13 +1805,11 @@ br.lists.spells = {
                 lightOfTheMartyr            = 183998,
 				shieldOfTheRighteous        = 53600,
 				wordOfGlory					= 85673,
-				
             },
             artifacts                       = {
 
             },
             buffs                           = {
-                auraOfMercy                 = 183415,
                 auraMastery                 = 31821,
                 avengingWrath               = 31884,
                 avengingWrathCrit           = 294027,

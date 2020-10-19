@@ -306,6 +306,8 @@ local function createOptions()
         -- Holy Shock
         br.ui:createCheckbox(section, "Holy Shock Damage")
         br.ui:createCheckbox(section, "Aggressive Glimmer", "tries to keep one glimmer on target")
+        -- Shield of the Righteous
+        br.ui:createSpinner(section, "Shield of the Righteous", 1, 0, 40, 1, "", "|cffFFFFFFMinimum Shield of the Righteous Targets")
         -- Crusader Strike
         br.ui:createCheckbox(section, "Crusader Strike")
         br.ui:checkSectionState(section)
@@ -1718,7 +1720,7 @@ local function runRotation()
                         if cast.judgment(thisUnit) then
                             return true
                         end
-                    end
+                    end    
                 end
             end
 
@@ -1903,6 +1905,11 @@ local function runRotation()
                     return
                 end
             end
+            if isChecked("Shield of the Righteous") and cast.able.shieldOfTheRighteous() and holyPower >=3 and #enemies.yards5 >= getValue("Shield of the Righteous") then
+                if cast.shieldOfTheRighteous(thisUnit) then
+                    return true
+                end
+            end
             if cast.judgment(units.dyn30) then
                 return true
             end
@@ -2014,9 +2021,13 @@ local function runRotation()
                         return
                     end
                 end
+<<<<<<< HEAD
             elseif getSpellCD(20473) > gcd and holypower >=3 then
+=======
+            elseif getSpellCD(20473) > gcd then
+>>>>>>> 2d643253ce2c6767b68a53072f4bc54146210b6d
                 if br.unlocked then --EasyWoWToolbox == nil then
-                    if healConeAround(getValue("LoD Targets"), getValue("Light of Dawn"), 90, lightOfDawn_distance * lightOfDawn_distance_coff, 5 * lightOfDawn_distance_coff) then
+                    if healConeAround(getValue("LoD Targets"), getValue("Light of Dawn"), 90, lightOfDawn_distance * lightOfDawn_distance_coff, 5 * lightOfDawn_distance_coff) and holyPower >=3 then
                         if cast.lightOfDawn() then
                             return true
                         end
