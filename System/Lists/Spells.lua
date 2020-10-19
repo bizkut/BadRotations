@@ -442,13 +442,14 @@ br.lists.spells = {
 
             },
             buffs                           = {
+                innerDemon                  = 337313,
                 metamorphosis               = 162264,
                 momentum                    = 208628,
                 prepared                    = 203650,
+                unboundChaos                = 234059,
             },
             debuffs                         = {
-                darkSlash                   = 258860,
-                nemesis                     = 206491,
+                essenceBreak                = 258860,
             },
             glyphs                          = {
 
@@ -540,6 +541,20 @@ br.lists.spells = {
                 voidReaver                  = 268175,
             },
         },
+        -- Initial Demon Hunter 8-10
+        [1456] = {
+            abilities                       = {
+                chaosStrike                 = 162794,
+                demonsBite                  = 162243,
+                felRush                     = 195072,
+            },
+            buffs                           = {
+
+            },
+            debuffs                         = {
+
+            },
+        },
         -- All
         Shared = {
             abilities                       = {
@@ -555,6 +570,7 @@ br.lists.spells = {
 
             },
             buffs                           = {
+                felCrystalInfusion          = 193547,
                 gazeOfTheLegion             = 193456,
                 glide                       = 131347,
                 immolationAura              = 258920,
@@ -591,7 +607,7 @@ br.lists.spells = {
                 newMoon                     = 274281,
                 removeCorruption            = 2782,
                 solarBeam                   = 78675,
-                solarWrath                  = 190984,
+                wrath                       = 190984,
                 starfall                    = 191034,
                 starsurge                   = 78674,
                 sunfire                     = 93402,
@@ -621,6 +637,7 @@ br.lists.spells = {
                 sephuzSecret                = 208052,
                 astralAcceleration          = 242232,
                 newMoonController           = -2027671,
+                solstice                    = 343648,
                 starfall                    = 191034,
                 starLord                    = 279709,   --backwards compatible
                 starlord                    = 279709,
@@ -794,8 +811,11 @@ br.lists.spells = {
                 ironbark                    = 102342,
                 lifebloom                   = 33763,
                 naturesCure                 = 88423,
+                nourish                     = 50464,
                 revitalize                  = 212040,
-                solarWrath                  = 5176,
+                wrath                       = 5176,
+                starfire                    = 197628,
+                starsurge                   = 197626,
                 sunfire                     = 93402,
                 tranquility                 = 740,
                 ursolsVortex                = 102793,
@@ -814,9 +834,11 @@ br.lists.spells = {
                 groveTending                = 279793,
                 rejuvenationGermination     = 155777,
                 lifebloom                   = 33763,
-                lunarEmpowerment            = 164547,
+                eclipse_lunar               = 48518,
+                eclipse_solar               = 48517,
+                --lunarEmpowerment            = 164547,
                 regrowth                    = 8936,
-                solarEmpowerment            = 164545,
+                --solarEmpowerment            = 164545,
                 soulOfTheForest             = 114108,
                 cultivat                    = 200389,
                 tranquility                 = 157982,
@@ -2682,7 +2704,7 @@ br.lists.spells = {
             -- },
         },
     },
-    SHAMAN = {
+ SHAMAN = {
         -- Elemental
         [262] = {
             abilities                       = {
@@ -2759,9 +2781,9 @@ br.lists.spells = {
                 ancestralGuidance           = 108281,
                 --ancestralSwiftness          = 192087,
                 ascendance                  = 114050,
-                callTheThunder              = 260897,
                 earthenRage                 = 170374,
-                echoOfTheElements           = 108283,
+                echoOfTheElements           = 333919,
+                echoingShock                = 320125,
                 elementalBlast              = 117014,
                 --elementalFusion             = 192235,
                 --elementalMastery            = 16166,
@@ -2775,7 +2797,6 @@ br.lists.spells = {
                 stormElemental              = 192249,
                 stormKeeper                 = 191634,
                 surgeOfPower                = 262303,
-                totemMastery                = 210643,
             },
             traits                          = {
                 naturalHarmony              = 278697,
@@ -2793,11 +2814,11 @@ br.lists.spells = {
                 earthenSpike                = 188089,
                 feralLunge                  = 196884,
                 feralSpirit                 = 51533,
-                flametongue                 = 193796,
+                flametongue                 = 318038,
                 flameShock                  = 188389,
                 frostShock                  = 196840,
                 furyOfAir                   = 197211,
-                healingSurge                = 188070,
+                healingSurge                = 8004,
                 lavaLash                    = 60103,
                 lightningBolt               = 188196,
                 lightningShield             = 192106,
@@ -2806,6 +2827,7 @@ br.lists.spells = {
                 stormstrike                 = 17364,
                 sundering                   = 197214,
                 totemMastery                = 262395,
+                windFuryWeapon              = 33757,
                 windstrike                  = 115356, --17364,
                 windFuryTotem               = 8512,
             },
@@ -2873,7 +2895,7 @@ br.lists.spells = {
                 strengthOfTheEarth          = 273461,
             },
         },
-        -- Restoration
+       -- Restoration
         [264] = {
             abilities                       = {
              --   ancestralGuidance           = 108281,
@@ -2886,7 +2908,7 @@ br.lists.spells = {
                 downpour                    = 207778,
                 earthShield                 = 974,
                 earthenWallTotem            = 198838,
-                flameShock                  = 188838,
+                flameShock                  = 188389,
               --  giftOfTheQueen              = 207778,
                 healingRain                 = 73920,
                 healingSurge                = 8004,
@@ -2895,7 +2917,7 @@ br.lists.spells = {
                 healingWave                 = 77472,
                 heroism                     = 32182,
                 lavaBurst                   = 51505,
-                lightningBolt               = 403,
+                lightningBolt               = 188196,
                 purifySpirit                = 77130,
                 riptide                     = 61295,
                 spiritLinkTotem             = 98008,
@@ -2918,7 +2940,7 @@ br.lists.spells = {
                 spiritwalkersGrace          = 79206,
             },
             debuffs                         = {
-                flameShock                  = 188838,
+                flameShock                  = 188389,
             },
             glyphs                          = {
             },
@@ -2928,14 +2950,38 @@ br.lists.spells = {
                 ascendance                  = 114052,
                 cloudburstTotem             = 157153,
                 downpour                    = 207778,
-                earthenWallTotem          = 198838,
-                earthShield                 = 974,
+                earthenWallTotem            = 198838,
                 echoOfTheElements           = 108283,
                -- gustOfWind                  = 192063,
                 highTide                    = 157154,
                 unleashLife                 = 73685,
                 wellspring                  = 197995,
                 windRushTotem               = 192077,
+            },
+        },
+        [1444] =  {
+            abilities                       = {
+                chainLightning              = 188443,
+                flameShock                  = 188389,
+                flametongue                 = 318038,
+                healingSurge                = 8004,
+                lightningBolt               = 188196,
+                lightningShield             = 192106,
+                primalStrike                = 73899,
+            },
+            buffs                           = {
+                lightningShield             = 192106,
+
+            },
+            debuffs                         = {
+                flameShock                  = 188389,
+
+            },
+            glyphs                          = {
+
+            },
+            talents                         = {
+                
             },
         },
         -- All
@@ -3220,7 +3266,6 @@ br.lists.spells = {
             abilities                       = {
                 controlDemon                = 93375,
                 corruption                  = 172,
-                createHearthstone           = 6201,
                 curseOfWeakness             = 702,
                 drainLife                   = 234153,
                 shadowBolt                  = 686,
@@ -3237,6 +3282,7 @@ br.lists.spells = {
         -- All
         Shared = {
             abilities                       = {
+                createHealthstone           = 6201,
                 darkPact                    = 108416,
                 demonicCircle               = 48018,
                 devourMagic                 = 19505,

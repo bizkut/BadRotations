@@ -121,7 +121,7 @@ function br.loader:new(spec,specName)
                     self.spell[spellType][spellRef] = spellID
                     -- Assign active spells to Abilities Subtable and base br.player.spell
                     if not IsPassiveSpell(spellID)
-                        and (spellType == 'abilities' or spellType == 'traits' or spellType == 'talents')
+                        and (spellType == 'abilities' or ((spellType == 'traits' or spellType == 'talents') and spec < 1400))
                     then
                         if self.spell.abilities == nil then self.spell.abilities = {} end
                         self.spell.abilities[spellRef] = spellID
@@ -158,6 +158,7 @@ function br.loader:new(spec,specName)
         local talentFound
         br.activeSpecGroup = GetActiveSpecGroup()
         if self.talent == nil then self.talent = {} end
+        if spec > 1400 then return end
         for k,v in pairs(self.spell.talents) do
             talentFound = false
             for r = 1, 7 do --search each talent row
@@ -380,6 +381,7 @@ function br.loader:new(spec,specName)
             if self.cast                == nil then self.cast               = {} end    -- Cast Spell Functions
             if self.charges             == nil then self.charges            = {} end    -- Spell Charge Functions
             if self.cd                  == nil then self.cd                 = {} end    -- Spell Cooldown Functions
+            -- if self.spell.known         == nil then self.spell.known        = {} end    -- Spell Known Function
 
             -- Build Spell Charges
             br.api.spells(self.charges,k,v,"charges")
@@ -387,6 +389,8 @@ function br.loader:new(spec,specName)
             br.api.spells(self.cd,k,v,"cd")
             -- Build Cast Funcitons
             br.api.spells(self.cast,k,v,"cast")
+            -- build Spell Known
+            br.api.spells(self.spell,k,v,"known")
         end
 
         -- Make Unit Functions from br.api.unit

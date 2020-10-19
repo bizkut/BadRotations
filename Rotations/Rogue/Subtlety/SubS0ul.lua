@@ -1,4 +1,4 @@
-local rotationName = "|cffff6060 SubS0ul - 9.x"
+local rotationName = "|cffFF6EB4 SubS0ul - 9.x"
 local opener = true
 local resetButton
 local dotBlacklist = "135824|139057|129359|129448|134503|137458|139185|120651"
@@ -71,6 +71,7 @@ local function createOptions()
             br.ui:createCheckbox(section, "Dot Blacklist", "Check to ignore certain units when multidotting.")
             br.ui:createCheckbox(section, "Auto Rupture HP Limit", "Will try to calculate if we should rupture units, based on their HP")
             br.ui:createSpinnerWithout(section,  "Multidot Limit",  3,  0,  8,  1,  "Max units to dot with rupture.")
+            br.ui:createSpinner(section, "Shuriken Toss out of range", 90,  1,  100,  5,  "Use Shuriken Toss out of range")
             br.ui:createCheckbox(section, "Ignore Blacklist for SS", "Ignore blacklist for Shrukien Storm usage.")
             br.ui:createSpinner(section,  "Save SD Charges for CDs",  0.75,  0,  1,  0.05,  "Shadow Dance charges to save for CDs. (Use toggle to disable SD for saving all)")
             br.ui:createDropdownWithout(section, "MfD Target", {"Lowest TTD", "Always Target"},  1, "MfD Target.")
@@ -583,13 +584,13 @@ local function runRotation()
             if cast.markedForDeath("target") then return true end
         end
         -- actions.precombat+=/Slice and Dice, if=precombat_seconds=1
-        if isChecked("Precombat") and (pullTimer <= 1 or targetDistance < 10) and combo > 0 then
+        if isChecked("Precombat") and (pullTimer <= 1 or targetDistance < 10) and combo > 0 and buff.sliceAndDice.remain() < 6+(combo*3) then
             if cast.sliceAndDice() then return true end
         end
-        -- actions.precombat+=/shadowBlades, if=runeforge.mark_of_the_master_assassin.equipped
-        if isChecked("Precombat") and validTarget and cdUsage and targetDistance < 5 then -- and runeforge.markOfTheMasterAssassin.active()
-            if cast.shadowBlades("player") then return true end
-        end
+        -- -- actions.precombat+=/shadowBlades, if=runeforge.mark_of_the_master_assassin.equipped
+        -- if isChecked("Precombat") and validTarget and cdUsage and targetDistance < 5 then -- and runeforge.markOfTheMasterAssassin.active()
+        --     if cast.shadowBlades("player") then return true end
+        -- end
     end
 
     local function actionList_CooldownsOGCD()
@@ -602,6 +603,10 @@ local function runRotation()
         -- actions.cds+=/symbols_of_death,use_off_gcd=1,if=buff.shuriken_tornado.up&buff.shuriken_tornado.remains<=3.5
         if mode.sod == 1 and (buff.shurikenTornado.exists() and buff.shurikenTornado.remain() <= 3.5 or not talent.shurikenTornado) then
             if cast.symbolsOfDeath("player") then return true end
+        end
+        -- actions.cds+=/shadow_blades,if=variable.snd_condition&combo_points.deficit>=2
+        if cdUsage and sndCondition and not stealthedAll and comboDeficit >= 2 and isChecked("Shadow Blades") and ttd("target") > getOptionValue("CDs TTD Limit") then
+            if cast.shadowBlades("player") then return true end
         end
     end
 
@@ -643,7 +648,7 @@ local function runRotation()
                 if cast.worldveinResonance("player") then return true end
             end
             -- actions.essences+=/memory_of_lucid_dreams,if=energy<40&buff.symbols_of_death.up
-            if cast.able.memoryOfLucidDreams() and energy < 40 and buff.symbolsOfDeath.exists("target") then
+            if cast.able.memoryOfLucidDreams() and energy < 40 and buff.symbolsOfDeath.exists() then
                 if cast.memoryOfLucidDreams("player") then return true end
             end
             -- Essence: Reaping Flames
@@ -733,10 +738,6 @@ local function runRotation()
         if #enemyTable30 == 1 and comboDeficit >= comboMax then
             if cast.markedForDeath("target") then return true end
         end
-        -- actions.cds+=/shadow_blades,if=variable.snd_condition&combo_points.deficit>=2
-        if cdUsage and sndCondition and not stealthedAll and comboDeficit >= 2 and isChecked("Shadow Blades") and ttd("target") > getOptionValue("CDs TTD Limit") then
-            if cast.shadowBlades("player") then return true end
-        end
 ---------------------------- SHADOWLANDS
         -- actions.cds+=/echoing_reprimand,if=variable.snd_condition&combo_points.deficit>=3&spell_targets.shuriken_storm<=4
         -- if sndCondition and comboDeficit >= 3 and enemies10 <= 4 then
@@ -744,7 +745,7 @@ local function runRotation()
         -- end
         -- -- # With SF, if not already done, use Tornado with SoD up.
         -- -- actions.cds+=/shuriken_tornado,if=talent.shadow_focus.enabled&variable.snd_condition&buff.symbols_of_death.up
-        -- if talent.shadowFocus and sndCondition and buff.symbolsOfDeath.exists("target") then
+        -- if talent.shadowFocus and sndCondition and buff.symbolsOfDeath.exists() then
         --     if cast.shurikenTornado("player") then return true end
         -- end
         -- -- actions.cds+=/shadow_dance,if=!buff.shadow_dance.up&fight_remains<=8+talent.subterfuge.enabled
@@ -752,9 +753,9 @@ local function runRotation()
         --     if cast.shadowDance("player") then return true end
         -- end
         -- -- actions.cds+=/shiv,if=level>=58&dot.rupture.ticking&(!equipped.azsharas_font_of_power|cooldown.vendetta.remains>10) --not buff.masterAssassin.exists() and
-        if (debuff.rupture.exists("target") or not shallWeDot("target")) and (buff.symbolsOfDeath.remain() > 8 or buff.shadowBlades.remain() > 9) and (ttd("target") > 3 or isBoss()) then
-            if cast.shiv("target") then return true end
-        end
+        -- if (debuff.rupture.exists("target") or not shallWeDot("target")) and (buff.symbolsOfDeath.remain() > 8 or buff.shadowBlades.remain() > 9) and (ttd("target") > 3 or isBoss()) then
+        --     if cast.shiv("target") then return true end
+        -- end
         -- actions.cds+=/potion,if=buff.bloodlust.react|buff.symbols_of_death.up&(buff.shadow_blades.up|cooldown.shadow_blades.remains<=10)
 ---------------------------- SHADOWLANDS
         if cdUsage and ttd("target") > getOptionValue("CDs TTD Limit") and isChecked("Potion") and (hasBloodLust() or (buff.symbolsOfDeath.exists("target") and (buff.shadowBlades.exists() or cd.shadowBlades.remain() <= 10))) then
@@ -773,7 +774,7 @@ local function runRotation()
         -- actions.cds+=/berserking,if=buff.symbols_of_death.up
         -- actions.cds+=/fireblood,if=buff.symbols_of_death.up
         -- actions.cds+=/ancestral_call,if=buff.symbols_of_death.up
-        if cdUsage and isChecked("Racial") and buff.symbolsOfDeath.exists("target") and ttd("target") > getOptionValue("CDs TTD Limit") then
+        if cdUsage and isChecked("Racial") and buff.symbolsOfDeath.exists() and ttd("target") > getOptionValue("CDs TTD Limit") then
             if race == "Orc" or race == "MagharOrc" or race == "DarkIronDwarf" or race == "Troll" then
                 if cast.racial("player") then return true end
             end
@@ -792,7 +793,7 @@ local function runRotation()
             end
         end
         -- actions.cds+=/use_items,if=buff.symbols_of_death.up|fight_remains<20
-        if cdUsage and isChecked("Trinkets") and (buff.symbolsOfDeath.exists("target") or not isChecked("Symbols of Death")) and ttd("target") > getOptionValue("CDs TTD Limit") or ttd("target") < 20 then
+        if cdUsage and isChecked("Trinkets") and (buff.symbolsOfDeath.exists() or not isChecked("Symbols of Death")) and ttd("target") > getOptionValue("CDs TTD Limit") or ttd("target") < 20 then
             if canUseItem(13) and not (hasEquiped(169311, 13) or hasEquiped(169314, 13) or hasEquiped(159614, 13)) then
                 useItem(13)
             end
@@ -875,7 +876,7 @@ local function runRotation()
         if comboDeficit >= 4 or (comboDeficit <= 1 and priorityRotation) then shdComboPoints = 1 else shdComboPoints = 0 end
         -- # Dance during Symbols or above threshold.
         -- actions.stealth_cds+=/shadow_dance,if=variable.shd_combo_points&(variable.shd_threshold|buff.symbols_of_death.remains>=1.2|spell_targets.shuriken_storm>=4&cooldown.symbols_of_death.remains>10)
-        if mode.sd == 1 and ttd("target") > 3 and (cdUsage or (isChecked("Save SD Charges for CDs") and charges.shadowDance.frac() >= (getOptionValue("Save SD Charges for CDs") + 1)) or not isChecked("Save SD Charges for CDs")) 
+        if mode.sd == 1 and ttd("target") > 3 and cdUsage and (isChecked("Save SD Charges for CDs") and charges.shadowDance.frac() >= (getOptionValue("Save SD Charges for CDs") + 1)) or not isChecked("Save SD Charges for CDs")
          and shdComboPoints and (shdComboPoints or buff.symbolsOfDeath.remain() >= 1.2 or enemies10 >= 4 and cd.symbolsOfDeath.remain() > 10) then
             if cast.shadowDance("player") then return true end
         end
@@ -921,7 +922,7 @@ local function runRotation()
         end
         -- # For priority rotation, use Shadowstrike over Storm 1) with WM against up to 4 targets, 2) if FW is running off (on any amount of targets), or 3) to maximize SoD extension with Inevitability on 3 targets (4 with BitS).
         -- actions.stealthed+=/shadowstrike,if=variable.use_priority_rotation&(debuff.find_weakness.remains<1|talent.weaponmaster.enabled&spell_targets.shuriken_storm<=4|azerite.inevitability.enabled&buff.symbols_of_death.up&spell_targets.shuriken_storm<=3+azerite.blade_in_the_shadows.enabled)
-        if priorityRotation and (debuff.findWeakness.remain("target")<1 or talent.weaponmaster and enemies10 <= 4 or triat.inevitability.active and buff.symbolsOfDeath.exists("target") and enemies10 <= 3+bitsActive) and targetDistance < 5 then
+        if priorityRotation and (debuff.findWeakness.remain("target")<1 or talent.weaponmaster and enemies10 <= 4 or triat.inevitability.active and buff.symbolsOfDeath.exists() and enemies10 <= 3+bitsActive) and targetDistance < 5 then
             if cast.shadowstrike("target") then return true end
         end
         -- actions.stealthed+=/shuriken_storm,if=spell_targets>=3+(buff.premeditation.up|buff.the_rotten.up|runeforge.akaaris_soul_fragment.equipped&conduit.deeper_daggers.rank>=7)
@@ -992,6 +993,10 @@ local function runRotation()
         end
         -- actions.build+=/backstab
         if cast.backstab("target") then return end
+        -- Use Shuriken Toss if we can't reach the target
+        if isChecked("Shuriken Toss out of range") and not stealthedRogue and #enemyTable5 == 0 and energy >= getOptionValue("Shuriken Toss out of range") and inCombat then
+            if cast.shurikenToss() then return true end
+        end
     end
 -----------------
 --- Rotations ---
@@ -1057,7 +1062,7 @@ local function runRotation()
                 if combatTime < 10 then 
                     cTime = 1
                 end
-                if enemies10 < 6 and ttd("target") > 6 and buff.sliceAndDice.remain() < gcdMax and combo >= 4-(cTime*2) then
+                if enemies10 < 6 and ttd("target") > 6 and buff.sliceAndDice.remain() < gcdMax and combo >= 4-(cTime*2) and buff.sliceAndDice.remain() < 6+(combo*3) then
                     if cast.sliceAndDice("player") then return true end
                 end
                 -- # Priority Rotation? Let's give a crap about energy for the stealth CDs (builder still respect it). Yup, it can be that simple.
